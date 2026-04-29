@@ -77,9 +77,10 @@ export function Catalog() {
         {filteredProducts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {filteredProducts.map((product) => (
-              <div
+              <button
                 key={product.id}
-                className="group motion-card bg-white rounded-lg overflow-hidden shadow-sm flex flex-col cursor-pointer active:scale-[0.97]"
+                type="button"
+                className="group motion-card bg-white rounded-lg overflow-hidden shadow-sm flex flex-col cursor-pointer active:scale-[0.97] text-left"
                 onClick={() => openProduct(product)}
               >
                 <div className="relative aspect-square overflow-hidden bg-gray-100">
@@ -90,9 +91,9 @@ export function Catalog() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                  <button className="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-gray-900 px-4 py-2 rounded-md text-sm font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 active:scale-[0.96]">
+                  <div className="absolute bottom-4 right-4 pointer-events-none bg-white/90 backdrop-blur text-gray-900 px-4 py-2 rounded-md text-sm font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                     View Details
-                  </button>
+                  </div>
                 </div>
 
                 <div className="p-5 flex flex-col flex-grow">
@@ -108,7 +109,7 @@ export function Catalog() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         ) : (
@@ -132,7 +133,14 @@ export function Catalog() {
         )}
       </div>
 
-      <ProductModal product={selectedProduct} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ProductModal
+        product={selectedProduct}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false)
+          setSelectedProduct(null)
+        }}
+      />
     </section>
   )
 }
