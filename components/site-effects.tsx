@@ -23,10 +23,23 @@ export function SiteEffects() {
           }
         })
       },
-      { threshold: 0.12 },
+      // lower threshold so content doesn't remain hidden when only partially visible
+      { threshold: 0.02 },
     )
 
-    document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element))
+    const revealElements = Array.from(document.querySelectorAll("[data-reveal]"))
+
+    // Immediately reveal anything already in-view (prevents "blank" sections on anchor navigation)
+    revealElements.forEach((element) => {
+      const el = element as HTMLElement
+      const rect = el.getBoundingClientRect()
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        el.classList.add("is-visible")
+        observer.unobserve(el)
+      }
+    })
+
+    revealElements.forEach((element) => observer.observe(element))
     updateHeader()
     window.addEventListener("scroll", updateHeader, { passive: true })
 
