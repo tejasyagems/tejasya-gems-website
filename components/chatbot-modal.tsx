@@ -71,7 +71,7 @@ export function ChatbotModal({ isOpen, onClose }: ChatbotModalProps) {
 
   return (
     <div className="fixed bottom-32 left-2 z-50 animate-in fade-in slide-in-from-left-5 duration-300">
-      <div className="bg-white rounded-lg shadow-2xl w-80 h-[500px] flex flex-col border border-gray-200">
+      <div className="bg-white rounded-lg shadow-2xl w-80 h-[320px] flex flex-col border border-gray-200">
         {/* Header */}
         {/* fixed: replaced generic gradient header with brand color */}
         <div className="bg-[#1a3a3a] text-white p-3 rounded-t-lg flex items-center justify-between flex-shrink-0">
